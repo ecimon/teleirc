@@ -5,6 +5,9 @@ A simple [Telegram](https://telegram.org/) ↔ IRC gateway.
 [Changelog](https://fruitiex.org/blog/tag/teleirc/)
 
 [![Build Status](https://travis-ci.org/FruitieX/teleirc.svg?branch=develop)](https://travis-ci.org/FruitieX/teleirc)
+[![npm module](https://img.shields.io/npm/v/teleirc.svg?style=flat)](https://www.npmjs.com/package/teleirc)
+[![dependencies](https://david-dm.org/fruitiex/teleirc.svg)](https://david-dm.org/fruitiex/teleirc#info=Dependencies)
+[![devDependencies](https://david-dm.org/fruitiex/teleirc/dev-status.svg)](https://david-dm.org/fruitiex/teleirc#info=devDependencies)
 
 #### Features:
 
@@ -22,8 +25,9 @@ Make sure you've installed Node.js.
 1. Install the teleirc npm module with `npm install -g teleirc` (might need sudo)
 2. Generate a default config using `teleirc --genconfig`
 3. Set up your bot with [BotFather](https://telegram.me/botfather)
-4. Use the `/setprivacy` command with `BotFather` to allow the bot to
-   see all Telegram messages
+4. Use the `/setprivacy` command with `BotFather` to allow your bot to
+   see all messages in your group (NOTE on usage: bot name is preceded by @ sign
+   and 'Disable' is case-sensitive)
 5. Edit the default config `$EDITOR ~/.teleirc/config.js`
 6. Run `teleirc`
 7. Invite your bot to any Telegram groups you've configured it for
