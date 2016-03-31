@@ -7,6 +7,12 @@ var lookupChannel = function(chanName, channels) {
     })[0];
 };
 
+var isIgnored = function(arr, user) {
+    return arr.some(function(ignoredUser) {
+        return ignoredUser == user;
+    });
+};
+
 // generates channel list for ircOptions
 var getChannels = function(arr) {
     var result = [];
@@ -49,8 +55,10 @@ module.exports = function(config, sendTo) {
             if (match) {
                 message = match[1].trim();
             }
-            var text = '<' + user + '>: ' + message;
-            sendTo.tg(channel, text);
+            var text = '<' + user + '> ' + message;
+            if (!isIgnored(config.ignore, user)) {
+                sendTo.tg(channel, text);
+            }
         }
     });
 
@@ -65,7 +73,7 @@ module.exports = function(config, sendTo) {
             if (match) {
                 message = match[1].trim();
             }
-            var text = '*' + user + ': ' + message + '*';
+            var text = '*' + user + ' ' + message + '*';
             sendTo.tg(channel, text);
         }
     });
@@ -83,7 +91,7 @@ module.exports = function(config, sendTo) {
             return;
         }
 
-        var text = '* Topic for channel ' + channel.chanAlias || channel.ircChan +
+        var text = '* Topic for channel ' + (channel.chanAlias || channel.ircChan) +
                    ':\n' + topic.split(' | ').join('\n') +
                    '\n* set by ' + nick.split('!')[0];
         sendTo.tg(channel, text);
