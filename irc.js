@@ -97,6 +97,18 @@ module.exports = function(config, sendTo) {
         sendTo.tg(channel, text);
     });
 
+    sendTo.topic = function(channel) {
+        channel = irc.chans[channel.ircChan];
+
+        if (!channel) {
+            return;
+        }
+
+        var topic = channel.topic;
+
+        return topic;
+    };
+
     sendTo.ircNames = function(channel) {
         channel = irc.chans[channel.ircChan];
 

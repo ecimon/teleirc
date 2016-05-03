@@ -131,9 +131,10 @@ module.exports = function(config, sendTo) {
 
     var getOriginalMessage = function(msg) {
         var origMsg = msg.reply_to_message.text;
-        if (origMsg.length < 32)
+        if (origMsg.length < 32) {
             return origMsg;
-        return origMsg.substr(0, 32).trim() + " ...";
+        }
+        return origMsg.substr(0, 32).trim() + ' ...';
     };
 
     // Get our own Telegram user
@@ -170,6 +171,14 @@ module.exports = function(config, sendTo) {
                 names.join(', ');
 
             return tg.sendMessage(channel.tgChatId, names);
+        }
+
+        if (msg.text && !msg.text.indexOf('/topic')) {
+            var topic = sendTo.topic(channel);
+            topic = 'Topic on ' + (channel.chanAlias || channel.ircChan) + ':\n\n' +
+                topic;
+
+            return tg.sendMessage(channel.tgChatId, topic);
         }
 
         // skip posts containing media if it's configured off
